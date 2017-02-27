@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :owned_post, only: [:edit, :update, :destroy]  
   before_action :authenticate_user!
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :owned_post, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -34,18 +34,15 @@ class PostsController < ApplicationController
       flash[:success] = "Post updated hombre."
       redirect_to posts_path
     else
-      flash.now[:alert] = "Oh god, you weren't meant to see this picture!"
-      render :edit
+      flash.now[:alert] = "Something is wrong with your form!"
+      redirect_to root_path
     end
   end
 
   def destroy
-    if @post.destroy
-      flash[:success] = "Problem solved!  Post deleted."
-      redirect_to posts_path
-    else
-      flash[:success] = "Abs for days."
-    end
+    @post.destroy
+    flash[:success] = 'Problem solved!  Post deleted.'
+    redirect_to root_path
   end
 
   private
@@ -59,7 +56,7 @@ class PostsController < ApplicationController
   end
 
   def owned_post
-    unless current_user == @post.user
+    unless @post.user.id == current_user.id
       flash[:alert] = "That post doesn't belong to you!"
       redirect_to root_path
     end
