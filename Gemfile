@@ -47,3 +47,4 @@ gem 'haml'
 gem 'simple_form'
 gem "paperclip", "~> 5.0.0"
 gem 'capybara'
+gem 'kaminari', '~> 1.0', '>= 1.0.1'
