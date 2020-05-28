@@ -47,5 +47,5 @@ gem 'haml'
 gem 'simple_form'
 gem "paperclip", "~> 5.2.0"
 gem 'capybara'
-gem 'kaminari', '~> 1.0', '>= 1.0.1'
+gem 'kaminari', '~> 1.2'
 gem 'aws-sdk', '~> 2.8'
